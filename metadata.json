@@ -1,0 +1,6 @@
+{
+  "name": "KKU Thesis Format Guide",
+  "description": "An interactive, animated, and device-responsive KKU Thesis Formatting Reference Guide written in perfect, accessible Myanmar language for students.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
