@@ -54,6 +54,8 @@ import {
   citationRulesTranslations
 } from "./data/translations";
 
+import { ScrollReveal } from "./components/ScrollReveal";
+
 export default function App() {
   // Localization state
   const [appLanguage, setAppLanguage] = useState<"my" | "th" | "en">("my");
@@ -305,191 +307,203 @@ export default function App() {
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         {/* Core Search and Quick Lookup Engine Area */}
-        <section className={`p-6 rounded-2xl border ${sBorder} ${sCard} space-y-4 shadow-lg relative overflow-hidden`}>
-          <div className="absolute top-0 right-0 h-40 w-40 bg-radial from-[#ffd700]/5 to-transparent rounded-full pointer-events-none" />
-          
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-            <div className="space-y-1">
-              <h2 className={`font-serif text-lg font-bold ${sTextPrimary} flex items-center gap-2`}>
-                <Globe className="h-5 w-5 text-kku-gold animate-bounce" />
-                {t.search_title}
-              </h2>
-              <p className={`text-xs ${sTextMuted}`}>
-                {t.search_hint}
-              </p>
-            </div>
+        <ScrollReveal direction="up" delay={0.15}>
+          <section className={`p-6 rounded-2xl border ${sBorder} ${sCard} space-y-4 shadow-lg relative overflow-hidden`}>
+            <div className="absolute top-0 right-0 h-40 w-40 bg-radial from-[#ffd700]/5 to-transparent rounded-full pointer-events-none" />
             
-            {/* Direct quick badges list */}
-            <div className="flex flex-wrap gap-1.5">
-              {["margins", "fonts", "citations", "ethics"].map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  onClick={() => {
-                    setSearchQuery(item);
-                    // trigger search instantly
-                    const t_val = uiTranslations[appLanguage];
-                    if (item === "margins") setCustomSearchResponse(t_val.search_ans_margins);
-                    if (item === "fonts") setCustomSearchResponse(t_val.search_ans_fonts);
-                    if (item === "citations") setCustomSearchResponse(t_val.search_ans_cit);
-                    if (item === "ethics") setCustomSearchResponse(t_val.ethics_desc);
-                  }}
-                  className={`text-[10px] px-2.5 py-1 rounded-md font-mono font-bold uppercase cursor-pointer border ${
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <h2 className={`font-serif text-lg font-bold ${sTextPrimary} flex items-center gap-2`}>
+                  <Globe className="h-5 w-5 text-kku-gold animate-bounce" />
+                  {t.search_title}
+                </h2>
+                <p className={`text-xs ${sTextMuted}`}>
+                  {t.search_hint}
+                </p>
+              </div>
+              
+              {/* Direct quick badges list */}
+              <div className="flex flex-wrap gap-1.5">
+                {["margins", "fonts", "citations", "ethics"].map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery(item);
+                      // trigger search instantly
+                      const t_val = uiTranslations[appLanguage];
+                      if (item === "margins") setCustomSearchResponse(t_val.search_ans_margins);
+                      if (item === "fonts") setCustomSearchResponse(t_val.search_ans_fonts);
+                      if (item === "citations") setCustomSearchResponse(t_val.search_ans_cit);
+                      if (item === "ethics") setCustomSearchResponse(t_val.ethics_desc);
+                    }}
+                    className={`text-[10px] px-2.5 py-1 rounded-md font-mono font-bold uppercase cursor-pointer border ${
+                      isDarkMode
+                        ? "bg-[#141419] border-white/5 text-zinc-400 hover:text-white"
+                        : "bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                    }`}
+                  >
+                    #{item}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <form onSubmit={handleSearchSubmit} className="flex gap-2">
+              <div className="relative flex-1">
+                <span className="absolute inset-y-0 left-3 flex items-center text-zinc-550 pointer-events-none">
+                  <Search className="h-4 w-4" />
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={t.search_placeholder}
+                  className={`w-full pl-9 pr-4 py-2.5 text-xs rounded-xl border focus:outline-none focus:ring-1 focus:ring-[#ffd700] font-sans ${
                     isDarkMode
-                      ? "bg-[#141419] border-white/5 text-zinc-400 hover:text-white"
-                      : "bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                      ? "bg-[#131317] border-white/10 text-white placeholder-zinc-500"
+                      : "bg-slate-50 border-slate-300 text-slate-800 placeholder-slate-400"
                   }`}
-                >
-                  #{item}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <form onSubmit={handleSearchSubmit} className="flex gap-2">
-            <div className="relative flex-1">
-              <span className="absolute inset-y-0 left-3 flex items-center text-zinc-550 pointer-events-none">
-                <Search className="h-4 w-4" />
-              </span>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t.search_placeholder}
-                className={`w-full pl-9 pr-4 py-2.5 text-xs rounded-xl border focus:outline-none focus:ring-1 focus:ring-[#ffd700] font-sans ${
-                  isDarkMode
-                    ? "bg-[#131317] border-white/10 text-white placeholder-zinc-500"
-                    : "bg-slate-50 border-slate-300 text-slate-800 placeholder-slate-400"
-                }`}
-              />
-            </div>
-            <button
-              type="submit"
-              className="px-5 py-2.5 text-xs font-bold rounded-xl bg-[#ffd700] text-[#0a0a0c] hover:bg-[#e6c200] transition cursor-pointer flex-shrink-0"
-            >
-              {t.search_button}
-            </button>
-          </form>
-
-          {/* Collapsible search prompt results */}
-          <AnimatePresence>
-            {customSearchResponse && (
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                className={`p-4 rounded-xl border relative flex gap-3 text-xs leading-relaxed ${
-                  isDarkMode
-                    ? "bg-amber-500/5 border-amber-500/20 text-amber-200"
-                    : "bg-amber-50 border-amber-500/20 text-amber-900"
-                }`}
+                />
+              </div>
+              <button
+                type="submit"
+                className="px-5 py-2.5 text-xs font-bold rounded-xl bg-[#ffd700] text-[#0a0a0c] hover:bg-[#e6c200] transition cursor-pointer flex-shrink-0"
               >
-                <div className="flex-1">
-                  <strong>💡 Output Lookup Match:</strong>
-                  <p className="mt-1 font-serif leading-normal">{customSearchResponse}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCustomSearchResponse(null);
-                    setSearchQuery("");
-                  }}
-                  className={`text-[10px] font-bold underline cursor-pointer self-start flex-shrink-0 ${
-                    isDarkMode ? "text-amber-400 hover:text-white" : "text-amber-700 hover:text-slate-900"
+                {t.search_button}
+              </button>
+            </form>
+
+            {/* Collapsible search prompt results */}
+            <AnimatePresence>
+              {customSearchResponse && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  className={`p-4 rounded-xl border relative flex gap-3 text-xs leading-relaxed ${
+                    isDarkMode
+                      ? "bg-amber-500/5 border-amber-500/20 text-amber-200"
+                      : "bg-amber-50 border-amber-500/20 text-amber-900"
                   }`}
                 >
-                  {t.search_close}
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </section>
+                  <div className="flex-1">
+                    <strong>💡 Output Lookup Match:</strong>
+                    <p className="mt-1 font-serif leading-normal">{customSearchResponse}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCustomSearchResponse(null);
+                      setSearchQuery("");
+                    }}
+                    className={`text-[10px] font-bold underline cursor-pointer self-start flex-shrink-0 ${
+                      isDarkMode ? "text-amber-400 hover:text-white" : "text-amber-700 hover:text-slate-900"
+                    }`}
+                  >
+                    {t.search_close}
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </section>
+        </ScrollReveal>
 
         {/* Quick Spec Stats Row Grid */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className={`p-4 rounded-xl border ${sBorder} ${sCard} flex items-center gap-3.5`}>
-            <div className="h-10 w-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-              <FileText className="h-5 w-5" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <ScrollReveal direction="up" delay={0.2} className="h-full">
+            <div className={`p-4 rounded-xl border p-full h-full ${sBorder} ${sCard} flex items-center gap-3.5`}>
+              <div className="h-10 w-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 flex-shrink-0">
+                <FileText className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t.stat_paper_title}</div>
+                <div className={`text-xs font-bold ${sTextPrimary}`}>{t.stat_paper_val}</div>
+              </div>
             </div>
-            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t.stat_paper_title}</div>
-              <div className={`text-xs font-bold ${sTextPrimary}`}>{t.stat_paper_val}</div>
-            </div>
-          </div>
+          </ScrollReveal>
 
-          <div className={`p-4 rounded-xl border ${sBorder} ${sCard} flex items-center gap-3.5`}>
-            <div className="h-10 w-10 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400">
-              <Type className="h-5 w-5" />
+          <ScrollReveal direction="up" delay={0.25} className="h-full">
+            <div className={`p-4 rounded-xl border p-full h-full ${sBorder} ${sCard} flex items-center gap-3.5`}>
+              <div className="h-10 w-10 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 flex-shrink-0">
+                <Type className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t.stat_spacing_title}</div>
+                <div className={`text-xs font-bold ${sTextPrimary}`}>{t.stat_spacing_val}</div>
+              </div>
             </div>
-            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t.stat_spacing_title}</div>
-              <div className={`text-xs font-bold ${sTextPrimary}`}>{t.stat_spacing_val}</div>
-            </div>
-          </div>
+          </ScrollReveal>
 
-          <div className={`p-4 rounded-xl border ${sBorder} ${sCard} flex items-center gap-3.5`}>
-            <div className="h-10 w-10 rounded-lg bg-[#ffd700]/10 border border-[#ffd700]/20 flex items-center justify-center text-[#ffd700]">
-              <Award className="h-5 w-5" />
+          <ScrollReveal direction="up" delay={0.3} className="h-full">
+            <div className={`p-4 rounded-xl border p-full h-full ${sBorder} ${sCard} flex items-center gap-3.5`}>
+              <div className="h-10 w-10 rounded-lg bg-[#ffd700]/10 border border-[#ffd700]/20 flex items-center justify-center text-[#ffd700] flex-shrink-0">
+                <Award className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t.stat_cover_title}</div>
+                <div className={`text-xs font-bold ${sTextPrimary}`}>{t.stat_cover_val}</div>
+              </div>
             </div>
-            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t.stat_cover_title}</div>
-              <div className={`text-xs font-bold ${sTextPrimary}`}>{t.stat_cover_val}</div>
-            </div>
-          </div>
+          </ScrollReveal>
 
-          <div className={`p-4 rounded-xl border ${sBorder} ${sCard} flex items-center gap-3.5`}>
-            <div className="h-10 w-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-              <Layers className="h-5 w-5" />
+          <ScrollReveal direction="up" delay={0.35} className="h-full">
+            <div className={`p-4 rounded-xl border p-full h-full ${sBorder} ${sCard} flex items-center gap-3.5`}>
+              <div className="h-10 w-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                <Layers className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t.stat_margin_title}</div>
+                <div className={`text-xs font-bold ${sTextPrimary}`}>{t.stat_margin_val}</div>
+              </div>
             </div>
-            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t.stat_margin_title}</div>
-              <div className={`text-xs font-bold ${sTextPrimary}`}>{t.stat_margin_val}</div>
-            </div>
-          </div>
-        </section>
+          </ScrollReveal>
+        </div>
 
         {/* Tab Controls Menu Bar */}
-        <section className={`flex overflow-x-auto rounded-2xl p-1.5 gap-1 border ${sBorder} ${sCard} no-scrollbar`}>
-          {[
-            { id: "margins", label: t.tab_margins, icon: Layers },
-            { id: "fonts", label: t.tab_fonts, icon: Type },
-            { id: "paging", label: t.tab_paging, icon: FileText },
-            { id: "citations", label: t.tab_citations, icon: BookOpen },
-            { id: "assembler", label: t.tab_assembler, icon: Binary },
-            { id: "ethics", label: t.tab_ethics, icon: Scale },
-            { id: "downloads", label: t.tab_downloads || "Downloads", icon: Download }
-          ].map((tab) => {
-            const IconComp = tab.icon;
-            const isTabActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => {
-                  setActiveTab(tab.id);
-                  setCustomSearchResponse(null);
-                }}
-                className={`px-4 py-3 rounded-xl text-xs font-extrabold flex items-center gap-2 select-none transition-all duration-155 flex-shrink-0 cursor-pointer ${
-                  isTabActive
-                    ? "bg-[#ffd700] text-[#0a0a0c] shadow-md"
-                    : isDarkMode 
-                      ? "text-zinc-400 hover:bg-white/5 hover:text-white"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                }`}
-              >
-                <IconComp className="h-4.5 w-4.5" />
-                {tab.label}
-              </button>
-            );
-          })}
-        </section>
+        <ScrollReveal direction="up" delay={0.4}>
+          <section className={`flex overflow-x-auto rounded-2xl p-1.5 gap-1 border ${sBorder} ${sCard} no-scrollbar`}>
+            {[
+              { id: "margins", label: t.tab_margins, icon: Layers },
+              { id: "fonts", label: t.tab_fonts, icon: Type },
+              { id: "paging", label: t.tab_paging, icon: FileText },
+              { id: "citations", label: t.tab_citations, icon: BookOpen },
+              { id: "assembler", label: t.tab_assembler, icon: Binary },
+              { id: "ethics", label: t.tab_ethics, icon: Scale },
+              { id: "downloads", label: t.tab_downloads || "Downloads", icon: Download }
+            ].map((tab) => {
+              const IconComp = tab.icon;
+              const isTabActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => {
+                    setActiveTab(tab.id);
+                    setCustomSearchResponse(null);
+                  }}
+                  className={`px-4 py-3 rounded-xl text-xs font-extrabold flex items-center gap-2 select-none transition-all duration-155 flex-shrink-0 cursor-pointer ${
+                    isTabActive
+                      ? "bg-[#ffd700] text-[#0a0a0c] shadow-md"
+                      : isDarkMode 
+                        ? "text-zinc-400 hover:bg-white/5 hover:text-white"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                  }`}
+                >
+                  <IconComp className="h-4.5 w-4.5" />
+                  {tab.label}
+                </button>
+              );
+            })}
+          </section>
+        </ScrollReveal>
 
         {/* -------------------- TAB: MARGINS -------------------- */}
         {activeTab === "margins" && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-fade-in">
             
             {/* Visualizer sidebar controller */}
-            <div className={`lg:col-span-4 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6 flex flex-col justify-between`}>
+            <ScrollReveal direction="left" className={`lg:col-span-4 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6 flex flex-col justify-between`} delay={0.1}>
               <div className="space-y-4">
                 <div>
                   <h3 className={`font-serif text-lg font-bold ${sTextPrimary}`}>
@@ -587,10 +601,10 @@ export default function App() {
                   })}
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Simulated sheet visualization page preview */}
-            <div className={`lg:col-span-8 p-6 rounded-2xl border ${sBorder} ${sCard} flex flex-col justify-between space-y-6 relative overflow-hidden`}>
+            <ScrollReveal direction="right" className={`lg:col-span-8 p-6 rounded-2xl border ${sBorder} ${sCard} flex flex-col justify-between space-y-6 relative overflow-hidden`} delay={0.25}>
               
               {/* Header inside spec */}
               <div className={`flex items-center justify-between border-b ${sBorderSubtle} pb-3`}>
@@ -685,7 +699,7 @@ export default function App() {
 
               </div>
 
-            </div>
+            </ScrollReveal>
 
           </div>
         )}
@@ -695,7 +709,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-fade-in">
             
             {/* Typography selector side bar panel */}
-            <div className={`lg:col-span-4 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6 flex flex-col justify-between`}>
+            <ScrollReveal direction="left" className={`lg:col-span-4 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6 flex flex-col justify-between`} delay={0.1}>
               <div className="space-y-4">
                 <div>
                   <h3 className={`font-serif text-lg font-bold ${sTextPrimary}`}>
@@ -753,10 +767,10 @@ export default function App() {
                   ))}
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Interactive live sandbox canvas */}
-            <div className={`lg:col-span-8 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6 flex flex-col justify-between`}>
+            <ScrollReveal direction="right" className={`lg:col-span-8 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6 flex flex-col justify-between`} delay={0.25}>
               
               <div className="space-y-1">
                 <h4 className={`font-serif text-lg font-bold ${sTextPrimary}`}>
@@ -819,7 +833,7 @@ export default function App() {
                 </p>
               </div>
 
-            </div>
+            </ScrollReveal>
 
           </div>
         )}
@@ -829,7 +843,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-fade-in">
             
             {/* Left specifications list */}
-            <div className={`lg:col-span-5 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6`}>
+            <ScrollReveal direction="left" className={`lg:col-span-5 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6`} delay={0.1}>
               <div>
                 <h3 className={`font-serif text-lg font-bold ${sTextPrimary}`}>
                   {t.paging_title}
@@ -853,10 +867,10 @@ export default function App() {
                   ))}
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Right structural preview maps */}
-            <div className={`lg:col-span-7 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6 flex flex-col justify-between`}>
+            <ScrollReveal direction="right" className={`lg:col-span-7 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6 flex flex-col justify-between`} delay={0.25}>
               
               <div className="space-y-1">
                 <h4 className={`font-serif text-lg font-bold ${sTextPrimary}`}>
@@ -912,7 +926,8 @@ export default function App() {
                 </p>
               </div>
 
-            </div>
+            </ScrollReveal>
+
           </div>
         )}
 
@@ -921,7 +936,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-fade-in">
             
             {/* Left controller sidebar */}
-            <div className={`lg:col-span-4 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-5`}>
+            <ScrollReveal direction="left" className={`lg:col-span-4 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-5`} delay={0.1}>
               <div>
                 <h3 className={`font-serif text-lg font-bold ${sTextPrimary}`}>
                   {t.citations_title}
@@ -988,10 +1003,10 @@ export default function App() {
                   ))}
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Right main visualization / sandbox copy section */}
-            <div className={`lg:col-span-8 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6`}>
+            <ScrollReveal direction="right" className={`lg:col-span-8 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-6`} delay={0.25}>
               
               <div className={`flex items-center gap-2 border-b ${sBorderSubtle} pb-3 justify-between`}>
                 <div className="flex items-center gap-2">
@@ -1118,7 +1133,7 @@ export default function App() {
 
               </div>
 
-            </div>
+            </ScrollReveal>
 
           </div>
         )}
@@ -1128,7 +1143,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-fade-in">
             
             {/* Progress and instructions */}
-            <div className={`lg:col-span-4 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-5 flex flex-col justify-between`}>
+            <ScrollReveal direction="left" className={`lg:col-span-4 p-6 rounded-2xl border ${sBorder} ${sCard} space-y-5 flex flex-col justify-between`} delay={0.1}>
               <div>
                 <h3 className={`font-serif text-lg font-bold ${sTextPrimary}`}>
                   {t.assembler_heading_title}
@@ -1179,10 +1194,10 @@ export default function App() {
               >
                 <RotateCcw className="h-3.5 w-3.5" /> {t.assembler_reset}
               </button>
-            </div>
+            </ScrollReveal>
 
             {/* List sequence details and accordion */}
-            <div className="lg:col-span-8 space-y-3">
+            <ScrollReveal direction="right" className="lg:col-span-8 space-y-3" delay={0.25}>
               
               {assembleSteps.map((step, idx) => {
                 const isChecked = !!checkedSteps[step.id];
@@ -1278,7 +1293,7 @@ export default function App() {
                 );
               })}
 
-            </div>
+            </ScrollReveal>
 
           </div>
         )}
@@ -1287,48 +1302,51 @@ export default function App() {
         {activeTab === "ethics" && (
           <div className="space-y-6 animate-fade-in">
             
-            <div className={`p-6 rounded-2xl border ${sBorder} ${sCard} flex flex-col md:flex-row md:items-center justify-between gap-6`}>
-              <div className="space-y-1">
-                <h3 className={`font-serif text-xl font-bold ${sTextPrimary} flex items-center gap-2`}>
-                  <ShieldCheck className="h-6 w-6 text-[#ffd700]" />
-                  {t.ethics_title}
-                </h3>
-                <p className={`text-xs ${sTextMuted} leading-relaxed md:max-w-2xl`}>
-                  {t.ethics_desc}
-                </p>
-              </div>
+            <ScrollReveal direction="up" delay={0.1}>
+              <div className={`p-6 rounded-2xl border ${sBorder} ${sCard} flex flex-col md:flex-row md:items-center justify-between gap-6`}>
+                <div className="space-y-1">
+                  <h3 className={`font-serif text-xl font-bold ${sTextPrimary} flex items-center gap-2`}>
+                    <ShieldCheck className="h-6 w-6 text-[#ffd700]" />
+                    {t.ethics_title}
+                  </h3>
+                  <p className={`text-xs ${sTextMuted} leading-relaxed md:max-w-2xl`}>
+                    {t.ethics_desc}
+                  </p>
+                </div>
 
-              {/* Graphic stamp avatar illustration */}
-              <div className={`flex-shrink-0 border ${sBorder} rounded-xl px-4 py-3 flex items-center gap-3 shadow-md ${sInner}`}>
-                <Cpu className="h-8 w-8 text-[#ffd700] animate-pulse" />
-                <div className="font-serif">
-                  <div className="text-[10px] text-zinc-500 uppercase font-semibold">{t.ethics_responsible}</div>
-                  <div className="text-xs font-bold text-kku-gold">{t.ethics_standards}</div>
+                {/* Graphic stamp avatar illustration */}
+                <div className={`flex-shrink-0 border ${sBorder} rounded-xl px-4 py-3 flex items-center gap-3 shadow-md ${sInner}`}>
+                  <Cpu className="h-8 w-8 text-[#ffd700] animate-pulse" />
+                  <div className="font-serif">
+                    <div className="text-[10px] text-zinc-500 uppercase font-semibold">{t.ethics_responsible}</div>
+                    <div className="text-xs font-bold text-kku-gold">{t.ethics_standards}</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Structured articles lists grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {ethicsTranslations[appLanguage].map((art, idx) => (
-                <div 
-                  key={idx} 
-                  className={`rounded-2xl p-5 border ${sBorder} shadow-lg transition duration-150 flex flex-col justify-between ${sCard}`}
-                >
-                  <div className="space-y-3">
-                    <span className="inline-flex items-center justify-center h-8 w-8 rounded-lg bg-[#ffd700]/10 text-[#ffd700] border border-[#ffd700]/25 font-bold text-xs select-none">
-                      {art.id}
-                    </span>
-                    <div className="space-y-1">
-                      <h4 className={`font-extrabold ${sTextPrimary} text-xs tracking-wider uppercase font-mono leading-tight`}>
-                        {art.title}
-                      </h4>
+                <ScrollReveal key={idx} direction="up" delay={0.15 + (idx * 0.05)} className="h-full">
+                  <div 
+                    className={`rounded-2xl p-5 border h-full ${sBorder} shadow-lg transition duration-155 flex flex-col justify-between ${sCard}`}
+                  >
+                    <div className="space-y-3">
+                      <span className="inline-flex items-center justify-center h-8 w-8 rounded-lg bg-[#ffd700]/10 text-[#ffd700] border border-[#ffd700]/25 font-bold text-xs select-none">
+                        {art.id}
+                      </span>
+                      <div className="space-y-1">
+                        <h4 className={`font-extrabold ${sTextPrimary} text-xs tracking-wider uppercase font-mono leading-tight`}>
+                          {art.title}
+                        </h4>
+                      </div>
+                      <p className={`text-xs ${sTextMuted} leading-relaxed pt-2.5 border-t ${sBorderSubtle}`}>
+                        {art.desc}
+                      </p>
                     </div>
-                    <p className={`text-xs ${sTextMuted} leading-relaxed pt-2.5 border-t ${sBorderSubtle}`}>
-                      {art.desc}
-                    </p>
                   </div>
-                </div>
+                </ScrollReveal>
               ))}
             </div>
 
@@ -1339,84 +1357,88 @@ export default function App() {
         {activeTab === "downloads" && (
           <div className="space-y-6 animate-fade-in text-left">
             {/* Header intro panel */}
-            <div className={`p-6 rounded-2xl border ${sBorder} ${sCard} flex flex-col md:flex-row md:items-center justify-between gap-6`}>
-              <div className="space-y-1">
-                <h3 className={`font-serif text-xl font-bold ${sTextPrimary} flex items-center gap-2`}>
-                  <FolderDown className="h-6 w-6 text-kku-gold" />
-                  {t.downloads_title || "Official KKU Thesis Reference Files & Templates"}
-                </h3>
-                <p className={`text-xs ${sTextMuted} leading-relaxed md:max-w-2xl`}>
-                  {t.downloads_desc || "Direct and secure downloads for the official KKU handbook files, pre-configured MS Word template drafts, and chapter reference examples."}
-                </p>
-              </div>
+            <ScrollReveal direction="up" delay={0.1}>
+              <div className={`p-6 rounded-2xl border ${sBorder} ${sCard} flex flex-col md:flex-row md:items-center justify-between gap-6`}>
+                <div className="space-y-1">
+                  <h3 className={`font-serif text-xl font-bold ${sTextPrimary} flex items-center gap-2`}>
+                    <FolderDown className="h-6 w-6 text-kku-gold" />
+                    {t.downloads_title || "Official KKU Thesis Reference Files & Templates"}
+                  </h3>
+                  <p className={`text-xs ${sTextMuted} leading-relaxed md:max-w-2xl`}>
+                    {t.downloads_desc || "Direct and secure downloads for the official KKU handbook files, pre-configured MS Word template drafts, and chapter reference examples."}
+                  </p>
+                </div>
 
-              {/* Quick stats on files */}
-              <div className={`flex-shrink-0 border ${sBorder} rounded-xl px-4 py-3 flex items-center gap-3 shadow-md ${sInner}`}>
-                <BookMarked className="h-8 w-8 text-[#ffd700]" />
-                <div className="font-serif">
-                  <div className="text-[10px] text-zinc-500 uppercase font-semibold">10 Verified Sheets</div>
-                  <div className="text-xs font-bold text-kku-gold">A4 PDF & Word Doc</div>
+                {/* Quick stats on files */}
+                <div className={`flex-shrink-0 border ${sBorder} rounded-xl px-4 py-3 flex items-center gap-3 shadow-md ${sInner}`}>
+                  <BookMarked className="h-8 w-8 text-[#ffd700]" />
+                  <div className="font-serif">
+                    <div className="text-[10px] text-zinc-500 uppercase font-semibold">10 Verified Sheets</div>
+                    <div className="text-xs font-bold text-kku-gold">A4 PDF & Word Doc</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Filters and search controller */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              {/* Category filters */}
-              <div id="downloads-categories" className={`flex flex-wrap rounded-xl p-1 gap-1 border ${sBorder} ${sCard} self-start`}>
-                {[
-                  { key: "all", label: t.downloads_cat_all || "All Files" },
-                  { key: "handbook", label: t.downloads_cat_handbook || "Handbook & Templates" },
-                  { key: "chapters", label: t.downloads_cat_chapters || "Chapters Guides" },
-                  { key: "appendices", label: t.downloads_cat_appendices || "Appendix Elements" }
-                ].map((cat) => {
-                  const isActive = downloadCategory === cat.key;
-                  const count = cat.key === "all" 
-                    ? downloadResources.length 
-                    : downloadResources.filter(r => r.category === cat.key).length;
+            <ScrollReveal direction="up" delay={0.15}>
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                {/* Category filters */}
+                <div id="downloads-categories" className={`flex flex-wrap rounded-xl p-1 gap-1 border ${sBorder} ${sCard} self-start`}>
+                  {[
+                    { key: "all", label: t.downloads_cat_all || "All Files" },
+                    { key: "handbook", label: t.downloads_cat_handbook || "Handbook & Templates" },
+                    { key: "chapters", label: t.downloads_cat_chapters || "Chapters Guides" },
+                    { key: "appendices", label: t.downloads_cat_appendices || "Appendix Elements" }
+                  ].map((cat) => {
+                    const isActive = downloadCategory === cat.key;
+                    const count = cat.key === "all" 
+                      ? downloadResources.length 
+                      : downloadResources.filter(r => r.category === cat.key).length;
 
-                  return (
-                    <button
-                      key={cat.key}
-                      type="button"
-                      onClick={() => setDownloadCategory(cat.key)}
-                      className={`px-3 py-1.5 text-xs font-bold rounded-lg transition duration-150 cursor-pointer flex items-center gap-1.5 ${
-                        isActive
-                          ? "bg-[#ffd700] text-[#0a0a0c] shadow-md"
-                          : `text-zinc-500 hover:text-white`
-                      }`}
-                    >
-                      {cat.label}
-                      <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-sans font-bold ${
-                        isActive 
-                          ? "bg-[#0a0a0c]/10 text-[#0a0a0c]" 
-                          : "bg-white/5 border border-white/10 text-zinc-400"
-                      }`}>
-                        {count}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+                    return (
+                      <button
+                        key={cat.key}
+                        type="button"
+                        onClick={() => setDownloadCategory(cat.key)}
+                        className={`px-3 py-1.5 text-xs font-bold rounded-lg transition duration-150 cursor-pointer flex items-center gap-1.5 ${
+                          isActive
+                            ? "bg-[#ffd700] text-[#0a0a0c] shadow-md"
+                            : `text-zinc-500 hover:text-white`
+                        }`}
+                      >
+                        {cat.label}
+                        <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-sans font-bold ${
+                          isActive 
+                            ? "bg-[#0a0a0c]/10 text-[#0a0a0c]" 
+                            : "bg-white/5 border border-white/10 text-zinc-400"
+                        }`}>
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
 
-              {/* Search bar inside downloads */}
-              <div className="relative w-full md:max-w-xs">
-                <span className="absolute inset-y-0 left-3 flex items-center text-zinc-500 pointer-events-none">
-                  <Search className="h-3.5 w-3.5" />
-                </span>
-                <input
-                  type="text"
-                  value={downloadSearch}
-                  onChange={(e) => setDownloadSearch(e.target.value)}
-                  placeholder={t.downloads_search || "Search resources..."}
-                  className={`w-full pl-9 pr-4 py-2.5 text-xs rounded-xl border focus:outline-none focus:ring-1 focus:ring-[#ffd700] font-sans ${
-                    isDarkMode
-                      ? "bg-[#131317] border-white/10 text-white placeholder-zinc-500"
-                      : "bg-slate-50 border-slate-300 text-slate-800 placeholder-slate-400"
-                  }`}
-                />
+                {/* Search bar inside downloads */}
+                <div className="relative w-full md:max-w-xs">
+                  <span className="absolute inset-y-0 left-3 flex items-center text-zinc-500 pointer-events-none">
+                    <Search className="h-3.5 w-3.5" />
+                  </span>
+                  <input
+                    type="text"
+                    value={downloadSearch}
+                    onChange={(e) => setDownloadSearch(e.target.value)}
+                    placeholder={t.downloads_search || "Search resources..."}
+                    className={`w-full pl-9 pr-4 py-2.5 text-xs rounded-xl border focus:outline-none focus:ring-1 focus:ring-[#ffd700] font-sans ${
+                      isDarkMode
+                        ? "bg-[#131317] border-white/10 text-white placeholder-zinc-500"
+                        : "bg-slate-50 border-slate-300 text-slate-800 placeholder-slate-400"
+                    }`}
+                  />
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Resources List Cards */}
             {(() => {
@@ -1451,75 +1473,76 @@ export default function App() {
 
               return (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {filtered.map((resource) => {
+                  {filtered.map((resource, fIdx) => {
                     const rTitle = resource.title[appLanguage] || resource.title["en"];
                     const rDesc = resource.desc[appLanguage] || resource.desc["en"];
                     const isPDF = resource.format === "PDF";
 
                     return (
-                      <div
-                        key={resource.id}
-                        className={`p-5 rounded-2xl border ${sBorder} ${sCard} shadow-lg flex flex-col justify-between transition-all duration-150 hover:scale-[1.01]`}
-                      >
-                        <div className="space-y-3">
-                          {/* Top Row branding and meta details */}
-                          <div className="flex items-center justify-between">
-                            <span className={`text-[10px] px-2 py-0.5 rounded font-mono font-bold uppercase tracking-wider ${
-                              resource.category === "handbook" 
-                                ? "bg-amber-500/10 border border-amber-500/20 text-amber-400"
-                                : resource.category === "chapters"
-                                  ? "bg-indigo-500/10 border border-indigo-500/20 text-indigo-400"
-                                  : "bg-emerald-500/10 border border-emerald-500/10 text-emerald-400"
-                            }`}>
-                              {resource.category === "handbook" ? (t.downloads_cat_handbook || "Handbook") : resource.category === "chapters" ? (t.downloads_cat_chapters || "Chapters") : (t.downloads_cat_appendices || "Appendix")}
-                            </span>
-
-                            <div className="flex items-center gap-2">
-                              <span className={`text-[10px] uppercase font-bold font-mono px-1.5 py-0.5 rounded leading-none ${
-                                isPDF 
-                                  ? "bg-rose-500/15 text-rose-400 border border-rose-500/25" 
-                                  : "bg-cyan-500/15 text-cyan-400 border border-cyan-500/25"
+                      <ScrollReveal key={resource.id} direction="up" delay={0.2 + (fIdx * 0.05)} className="h-full">
+                        <div
+                          className={`p-5 rounded-2xl border h-full ${sBorder} ${sCard} shadow-lg flex flex-col justify-between transition-all duration-150 hover:scale-[1.01]`}
+                        >
+                          <div className="space-y-3">
+                            {/* Top Row branding and meta details */}
+                            <div className="flex items-center justify-between">
+                              <span className={`text-[10px] px-2 py-0.5 rounded font-mono font-bold uppercase tracking-wider ${
+                                resource.category === "handbook" 
+                                  ? "bg-amber-500/10 border border-amber-500/20 text-amber-400"
+                                  : resource.category === "chapters"
+                                    ? "bg-indigo-500/10 border border-indigo-500/20 text-indigo-400"
+                                    : "bg-emerald-500/10 border border-emerald-500/10 text-emerald-400"
                               }`}>
-                                {resource.format}
+                                {resource.category === "handbook" ? (t.downloads_cat_handbook || "Handbook") : resource.category === "chapters" ? (t.downloads_cat_chapters || "Chapters") : (t.downloads_cat_appendices || "Appendix")}
                               </span>
-                              <span className="text-[10px] font-mono font-bold text-zinc-500">
-                                {resource.fileSize}
-                              </span>
+
+                              <div className="flex items-center gap-2">
+                                <span className={`text-[10px] uppercase font-bold font-mono px-1.5 py-0.5 rounded leading-none ${
+                                  isPDF 
+                                    ? "bg-rose-500/15 text-rose-400 border border-rose-500/25" 
+                                    : "bg-cyan-500/15 text-cyan-400 border border-cyan-500/25"
+                                }`}>
+                                  {resource.format}
+                                </span>
+                                <span className="text-[10px] font-mono font-bold text-zinc-500">
+                                  {resource.fileSize}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Resource Name and Description */}
+                            <div className="space-y-1.5 text-left">
+                              <h4 className={`font-serif text-sm font-extrabold ${sTextPrimary}`}>
+                                {rTitle}
+                              </h4>
+                              <p className="font-mono text-[10px] text-[#ffd700]/75 truncate">
+                                {resource.fileName}
+                              </p>
+                              <p className={`text-xs ${sTextMuted} leading-relaxed pt-2 border-t ${sBorderSubtle}`}>
+                                {rDesc}
+                              </p>
                             </div>
                           </div>
 
-                          {/* Resource Name and Description */}
-                          <div className="space-y-1.5 text-left">
-                            <h4 className={`font-serif text-sm font-extrabold ${sTextPrimary}`}>
-                              {rTitle}
-                            </h4>
-                            <p className="font-mono text-[10px] text-[#ffd700]/75 truncate">
-                              {resource.fileName}
-                            </p>
-                            <p className={`text-xs ${sTextMuted} leading-relaxed pt-2 border-t ${sBorderSubtle}`}>
-                              {rDesc}
-                            </p>
+                          {/* Action buttons footer inside card */}
+                          <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+                            <span className="text-[9px] text-zinc-500 font-mono italic">
+                              Supabase Cloud Link
+                            </span>
+
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-[#ffd700] text-[#0a0a0c] hover:bg-[#e6c200] transition cursor-pointer shadow-sm select-none"
+                              referrerPolicy="no-referrer"
+                            >
+                              <Download className="h-3.5 w-3.5" />
+                              {t.downloads_btn || "Download File"}
+                            </a>
                           </div>
                         </div>
-
-                        {/* Action buttons footer inside card */}
-                        <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between gap-3">
-                          <span className="text-[9px] text-zinc-500 font-mono italic">
-                            Supabase Cloud Link
-                          </span>
-
-                          <a
-                            href={resource.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-[#ffd700] text-[#0a0a0c] hover:bg-[#e6c200] transition cursor-pointer shadow-sm select-none"
-                            referrerPolicy="no-referrer"
-                          >
-                            <Download className="h-3.5 w-3.5" />
-                            {t.downloads_btn || "Download File"}
-                          </a>
-                        </div>
-                      </div>
+                      </ScrollReveal>
                     );
                   })}
                 </div>
