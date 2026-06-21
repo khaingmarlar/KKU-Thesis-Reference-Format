@@ -460,3 +460,205 @@ export const inlineCitationsData = {
     ]
   }
 };
+
+export interface DownloadResource {
+  id: string;
+  fileName: string;
+  category: "handbook" | "chapters" | "appendices";
+  url: string;
+  fileSize: string;
+  format: "PDF" | "DOCX";
+  title: {
+    en: string;
+    th: string;
+    my: string;
+  };
+  desc: {
+    en: string;
+    th: string;
+    my: string;
+  };
+}
+
+export const downloadResources: DownloadResource[] = [
+  {
+    id: "ref-book",
+    fileName: "Reference Book.pdf",
+    category: "handbook",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/Reference%20Book.pdf",
+    fileSize: "7.8 MB",
+    format: "PDF",
+    title: {
+      en: "Thesis Formatting Handbook (Official Reference Book)",
+      th: "คู่มือการจัดพิมพ์วิทยานิพนธ์ (ฉบับเต็ม บัณฑิตวิทยาลัย)",
+      my: "ကျမ်းပြုစုမှုလက်စွဲစာအုပ် (ဘွဲ့လွန်ကျောင်း တရားဝင် ရည်ညွှန်းစာအုပ်)"
+    },
+    desc: {
+      en: "The comprehensive academic handbook containing all regulations, margins, fonts, spacing rules, and chapter sequences authorized by Khon Kaen University Graduate School.",
+      th: "หนังสือคู่มือฉบับสมบูรณ์ที่รวมทุกหลักระเบียบ ข้อกำหนดขอบกระดาษ รูปแบบฟอนต์ ระยะห่าง และการเรียงลำดับเนื้อหาที่ออกโดยบัณฑิตวิทยาลัย มหาวิทยาลัยขอนแก่น",
+      my: "Khon Kaen တက္ကသိုလ် ဘွဲ့လွန်ကျောင်းမှ ထုတ်ပြန်ထားသော စည်းမျဉ်းများ၊ အကွာအဝေးများနှင့် ကျမ်းပြုစုရန် လိုအပ်ချက်များအားလုံး ပါဝင်သော မူရင်း အကိုးအကားလမ်းညွှန်ချက်စာအုပ် ဖြစ်သည်။"
+    }
+  },
+  {
+    id: "template-en",
+    fileName: "template-EN.docx",
+    category: "handbook",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/template-EN.docx",
+    fileSize: "1.2 MB",
+    format: "DOCX",
+    title: {
+      en: "Official Thesis MS Word Template (English Layout)",
+      th: "เทมเพลตเอกสารเวิร์ดสำหรับการเขียนวิทยานิพนธ์ (ภาษาอังกฤษ)",
+      my: "တရားဝင် မိုက်ခရိုဆော့ဖ်ဝါ့ဒ် ကျမ်းတင်းပလိတ် (အင်္ဂလိပ်ပုံစံသွင်းပြီးသား)"
+    },
+    desc: {
+      en: "Ready-to-use editable Microsoft Word document properly pre-configured with the official 1.5-inch and 1.0-inch odd/even margins, styles, and page numbers.",
+      th: "ไฟล์เอกสาร Word พร้อมใช้งานที่ตั้งค่าโครงร่างหน้ากระดาษแบบสลับซ้ายขวา 1.5/1.0 นิ้วตามแบบมาตรฐาน รวมทั้งกำหนดคุณลักษณะหัวข้อและเลขหน้าไว้ถูกต้องแล้ว",
+      my: "KKU ၏ တရားဝင် စံနှုန်းသတ်မှတ်ချက်များ (၁.၅ လက်မ နှင့် ၁ လက်မ ဘေးအနားသတ်များ၊ စာလုံးပုံစံများ) အတိုင်း ပြင်ဆင်အသင့်သုံးအဖြစ် ပုံစံချပေးထားသော MS Word Format ဖိုင် ဖြစ်သည်။"
+    }
+  },
+  {
+    id: "chapter-4",
+    fileName: "chapter-4.pdf",
+    category: "chapters",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/chapter-4.pdf",
+    fileSize: "3.4 MB",
+    format: "PDF",
+    title: {
+      en: "Chapter 4 Guideline — Presentation of Results",
+      th: "ตัวอย่างนำเสนอผลการวิจัย (บทที่ 4)",
+      my: "အခန်း ၄ လမ်းညွှန်ချက် — သုတေသနတွေ့ရှိချက်များ တင်ပြပုံနမူနာဖိုင်"
+    },
+    desc: {
+      en: "Detailed sample illustrating how to structure statistical findings, construct descriptive tables, present figures, and write scientific explanations properly.",
+      th: "ตัวอย่างแนะนำการเขียนวิเคราะห์บทข้อมูลสถิติ การจัดทำตารางอธิบายข้อมูล ตัวเลขกราฟิก และการเรียบเรียงคำอธิบายเชิงวิชาการที่สอดคล้องตามกฎคู่มือ มข.",
+      my: "စာရင်းအင်းတွေ့ရှိချက်များ တင်ပြပုံ၊ ဇယားများစနစ်တကျတည်ဆောက်ပုံ၊ ပုံပြဇယားများစီစဉ်ပုံနှင့် သုတေသနရလဒ်များကို လမ်းညွှန်ချက်အတိုင်း ရေးသားပုံ နမူနာ ဖြစ်သည်။"
+    }
+  },
+  {
+    id: "chapter-5",
+    fileName: "chapter-5.pdf",
+    category: "chapters",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/chapter-5.pdf",
+    fileSize: "4.1 MB",
+    format: "PDF",
+    title: {
+      en: "Chapter 5 Guideline — APA Documentation",
+      th: "ตัวอย่างรูปแบบการอ้างอิง APA (บทที่ 5)",
+      my: "အခန်း ၅ လမ်းညွှန်ချက် — APA စတိုင် ကိုးကားစာရင်းစနစ်နမူနာဖိုင်"
+    },
+    desc: {
+      en: "Official sample showing how to build reference lists and compile bibliography details using the APA Style (Standard format for Arts, Humanities, and Social Sciences).",
+      th: "เอกสารจำลองแสดงวิธีเขียนรายการอ้างอิงและบรรณานุกรมด้านหลังโดยใช้มาตรฐาน APA ซึ่งเป็นรูปแบบที่บังคับใช้สำหรับสาขามนุษยศาสตร์และสังคมศาสตร์",
+      my: "ဝိဇ္ဇာ၊ လူမှုရေးသိပ္ပံဘာသာရပ်ကျောင်းသားများအတွက် အဓိကသတ်မှတ်ထားသော APA Style စံနှုန်းအတိုင်း ကိုးကားစာရင်းများနှင့် ကျမ်းကိုးစာရင်း တည်ဆောက်ပုံ စံနမူနာ ဖြစ်သည်။"
+    }
+  },
+  {
+    id: "chapter-6",
+    fileName: "chapter-6.pdf",
+    category: "chapters",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/chapter-6.pdf",
+    fileSize: "3.9 MB",
+    format: "PDF",
+    title: {
+      en: "Chapter 6 Guideline — Vancouver Style Reference",
+      th: "ตัวอย่างอ้างอิงรูปแบบ Vancouver (บทที่ 6)",
+      my: "အခန်း ၆ လမ်းညွှန်ချက် — Vancouver စတိုင် နံပါတ်စဉ် ကိုးကားနမူနာဖိုင်"
+    },
+    desc: {
+      en: "Comprehensive guide depicting Vancouver style requirements (sequential numbers in square brackets) mandatory for Medical Science and Technology departments.",
+      th: "ตัวอย่างแนวทางการอ้างอิงวิชาการสายชีวการแพทย์ วิทยาศาสตร์สุขภาพ และเทคโนโลยีตามระบบตัวเลขเดี่ยวเรียงลำดับจริง (Vancouver numerical pattern)",
+      my: "ကျန်းမာရေးမဟာဗျူဟာ၊ ဆေးသိပ္ပံနှင့် နည်းပညာဘာသာရပ်များအတွက် အသုံးပြုရန်ပြဋ္ဌာန်းထားသော Vancouver စတိုင်ဖြင့် နံပါတ်များ သုံး၍ ကိုးကားစာရင်း စုစည်းပုံစံနမူနာ ဖြစ်သည်။"
+    }
+  },
+  {
+    id: "appendix-a",
+    fileName: "appendix-a.pdf",
+    category: "appendices",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/appendix-a.pdf",
+    fileSize: "2.1 MB",
+    format: "PDF",
+    title: {
+      en: "Appendix A — Format Instructions Checklist",
+      th: "ภาคผนวก ก — ตารางและหลักเกณฑ์การตรวจสอบเนื้อหา",
+      my: "နောက်ဆက်တွဲ က — စာမျက်နှာအကွာအဝေးနှင့် အပြင်အဆင်စစ်ဆေးရန် Checklist"
+    },
+    desc: {
+      en: "Explaining core text alignments, chapter spacing checklists, margin boundaries, and general layout controls.",
+      th: "คำอธิบายวิธีจัดแนวตัวอักษร ระยะห่างตัวเล่มตารางสรุปเกณฑ์ขอบระยะ และการควบคุมรูปเล่มทั่วไป",
+      my: "ကျမ်း၏အဓိကအရာများ ညီညာစေရန် စာသားချိန်ညှိမှု၊ စာကြောင်းအကွာအဝေး၊ အနားသတ်များနှင့် အထွေထွေ အပြင်အဆင်စစ်ဆေးနည်းလမ်းများ ဖော်ပြချက် ဖြစ်သည်။"
+    }
+  },
+  {
+    id: "appendix-b",
+    fileName: "appendix-b.pdf",
+    category: "appendices",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/appendix-b.pdf",
+    fileSize: "2.5 MB",
+    format: "PDF",
+    title: {
+      en: "Appendix B — Advanced Layout Diagrams",
+      th: "ภาคผนวก ข — แผนภาพจำลองโครงสร้างและระยะห่างหน้า",
+      my: "နောက်ဆက်တွဲ ခ — သရုပ်ပြ ပုံပြမျဉ်းများနှင့် အသေးစိတ်နေရာချပုံစနစ်"
+    },
+    desc: {
+      en: "Visual grid blueprints demonstrating exact millimeter and inch positions of symbols, subtitles, page limits, and text structures.",
+      th: "ภาพโครงร่างเส้นกริดที่แสดงตำแหน่งมิลลิเมตรและนิ้วของสัญลักษณ์ คำนำหน้า ตัวหนาบาง และขอบแนวสัญญะอย่างแม่นยำชัดเจน",
+      my: "ကျမ်းသုံး သင်္ကေတများ၊ ခေါင်းစဉ်ခွဲများ၊ အကွာအဝေးများကို မီလီမီတာ သို့မဟုတ် လက်မ စနစ်များဖြင့် ကွက်တိနေရာချထားပုံ ပြသထားသော ပုံပြမြေပုံ ဖြစ်သည်။"
+    }
+  },
+  {
+    id: "appendix-c",
+    fileName: "appendix-c.pdf",
+    category: "appendices",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/appendix-c.pdf",
+    fileSize: "2.8 MB",
+    format: "PDF",
+    title: {
+      en: "Appendix C — Spine, Outer Cover, and Title Page Forms",
+      th: "ภาคผนวก ค — ตัวอย่างหน้าปกภายนอก สันเล่มวิทยานิพนธ์ และใบรองปก",
+      my: "နောက်ဆက်တွဲ ဂ — အပြင်ဖုံး၊ ကျမ်းစာအုပ်ဘေးစောင်း စာသားနှင့် ခေါင်းစဉ်စာမျက်နှာပုံစံများ"
+    },
+    desc: {
+      en: "Exact gold lettering layout on navy blue or black hardcovers, spinal thickness titles formatting, and internal title pages structures.",
+      th: "โครงร่างการปั๊มอักษรทองบนปกสีน้ำเงินเข้มหรือสีดำ รูปแบบการจัดตัวหนังสือบนสันเล่มหนา และแบบฟอร์มหน้าปกใน",
+      my: "ကျမ်းအဖုံးပြာ သို့မဟုတ် အနက်ရောင်ပေါ်တွင် ရွှေရောင်စာလုံးများ တိုက်ရိုက်ရိုက်ပုံ၊ ကျမ်းစာအုပ်၏ ဘေးစောင်း (Spine) ရေးထုံးနှင့် ခေါင်းစဉ်ပုံစံများ ဖြစ်သည်။"
+    }
+  },
+  {
+    id: "appendix-d",
+    fileName: "appendix-d.pdf",
+    category: "appendices",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/appendix-d.pdf",
+    fileSize: "1.9 MB",
+    format: "PDF",
+    title: {
+      en: "Appendix D — Certification Sheets & Committee Approvals",
+      th: "ภาคผนวก ง — แบบฟอร์มใบอนุมัติเล่มและสัมโมทนียกถา",
+      my: "နောက်ဆက်တွဲ ဃ — ဘွဲ့လွန်ကျောင်း အောင်မြင်ကြောင်း အသိအမှတ်ပြုလက်မှတ်နှင့် ကော်မတီအတည်ပြုချက်ပုံစံများ"
+    },
+    desc: {
+      en: "Approved templates for graduate degree sign-off sheets, advisory committees' approval signature box layouts, and administrative blocks forms.",
+      th: "แบบอนุมัติหลักสูตร แบบลงนามปกป้องสำเร็จวิทยานิพนธ์ การจัดชื่อคณะกรรมการ และรายละเอียดการเซ็นชื่อของประธานบริหาร",
+      my: "ကျမ်းကာကွယ်ပြီးနောက် ကော်မတီဝင်များနှင့် အကြံပေးဆရာများ လက်မှတ်ရေးထိုးရန် စနစ်တကျ ပြင်ဆင်ထားသော စံပြပုံစံခွက်များ ဖြစ်သည်။"
+    }
+  },
+  {
+    id: "appendix-e",
+    fileName: "example E.pdf",
+    category: "appendices",
+    url: "https://njzwaoupxsomchqabhcj.supabase.co/storage/v1/object/public/resources/example%20E.pdf",
+    fileSize: "4.5 MB",
+    format: "PDF",
+    title: {
+      en: "Appendix Example E — Visual Thesis Layout Model",
+      th: "ตัวอย่างภาคผนวก จ (Example E) — แบบจำลองรายละเอียดโครงหน้าเต็ม",
+      my: "နောက်ဆက်တွဲ လက်တွေ့နမူနာ ၅ (Example E) — သရုပ်ပြ ပုံစံချ ပြည့်စုံသောကျမ်းမြင်ကွင်း"
+    },
+    desc: {
+      en: "Fully rendered visual document illustrating completed thesis page samples, figures placing, references sections, and biographical appendices.",
+      th: "ตัวอย่างรูปเล่มพิมพ์ที่ผ่านการตรวจสอบสมบูรณ์แบบ ทั้งการระบุภาพประกอบ การจัดการอ้างอิง และประวัติผู้แต่งส่วนท้าย",
+      my: "စာမျက်နှာများအားလုံး စံနှုန်းကွက်တိ ကိုက်ညီမှုရှိသော၊ သရုပ်ပြပုံရိပ်များနှင့် CV အချက်အလက်များအထိ ရေးသားပြီးသားအဖြစ် ပြသထားသော ကျမ်းနမူနာစာအုပ် ဖြစ်သည်။"
+    }
+  }
+];
