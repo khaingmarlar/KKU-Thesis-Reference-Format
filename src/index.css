@@ -5,27 +5,27 @@
   --font-sans: "Inter", "Padauk", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Times New Roman", "Playfair Display", Georgia, serif;
   --font-thai: "Sarabun", sans-serif;
-  --color-sichan-50: #fdf2f0;
-  --color-sichan-100: #fbe5e2;
-  --color-sichan-500: #a73b24;
-  --color-sichan-600: #8f2f1a;
-  --color-sichan-700: #762413;
-  --color-kku-gold: #d4ac0d;
+  --color-sichan-50: #1a1a24;
+  --color-sichan-100: #2a2a35;
+  --color-sichan-500: #ffd700;
+  --color-sichan-600: #e6c200;
+  --color-sichan-700: #ccac00;
+  --color-kku-gold: #ffd700;
 }
 
-/* Custom styled scrollbars */
+/* Custom styled scrollbars for dark mode */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #0f0f12;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #2a2a35;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #ffd700;
 }
