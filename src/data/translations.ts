@@ -1,6 +1,6 @@
 export const uiTranslations = {
   en: {
-    top_tagline: "Khon Kaen University Thesis Format Handbook",
+    top_tagline: "⚠️ Disclaimer: These guidelines are explanations based on 2026 KKU GE details. For latest updates, follow official Graduate School (GS) guidelines.",
     header_title: "KKU Thesis Format Guide",
     header_subtitle: "Handbook",
     header_desc: "An interactive guidelines website for graduate students (Master & Ph.D.) to understand other formatting standards of Khon Kaen University officially in Myanmar, Thai & English.",
@@ -127,7 +127,7 @@ export const uiTranslations = {
     all_rights: "© 2026 KKU Graduate School Thesis Formatter. Created with ❤️ for Grad Students."
   },
   th: {
-    top_tagline: "คู่มือการจัดพิมพ์วิทยานิพนธ์ มหาวิทยาลัยขอนแก่น",
+    top_tagline: "⚠️ ข้อสำคัญ: คำแนะนำนี้อิงตามข้อมูลจาก KKU GE ปี 2026 เท่านั้น สำหรับการอัปเดตล่าสุด โปรดปฏิบัติตามแนวทางบัณฑิตวิทยาลัย (GS) เป็นสำคัญ",
     header_title: "ระบบแนะแนวการจัดรูปแบบวิทยานิพนธ์ มข.",
     header_subtitle: "Handbook",
     header_desc: "เว็บไซต์คู่มือแบบโต้ตอบสำหรับนักศึกษาระดับบัณฑิตศึกษา (ปริญญาโท & เอก) เพื่อความเข้าใจข้อกำหนดการจัดรูปแบบของ บัณฑิตวิทยาลัย มหาวิทยาลัยขอนแก่น ในเวอร์ชันแปลพม่า ไทย และอังกฤษ",
@@ -254,7 +254,7 @@ export const uiTranslations = {
     all_rights: "© 2026 คู่มือวิทยานิพนธ์ ขอนแก่น มข. สร้างขึ้นด้วยใจสำหรับมหาบัณฑิตและดุษฎีบัณฑิต"
   },
   my: {
-    top_tagline: "Khon Kaen University Thesis Format Handbook",
+    top_tagline: "⚠️ သတိပေးချက် - အခုလမ်းညွှန်းချက်တွေက KKU ရဲ့ GE က ၂၀၂၆ ခုနှစ်မှာ ပြောထားတဲ့ အချက်အလက်တွေအပေါ်မှာပဲ ရှင်းပြထားတဲ့ ရှင်းပြချက်ဖြစ်ပြီး၊ Updated အတွက်ကိုတော့ GS ရဲ့ လမ်းညွှန်ချက်တွေအတိုင်းပဲ လုပ်ဖို့ လိုအပ်ပါလိမ့်မယ်။",
     header_title: "KKU ကျမ်းပြုစုမှု လမ်းညွှန်ပြစနစ်",
     header_subtitle: "Handbook",
     header_desc: "ဘွဲ့လွန်ကျောင်းသားများ (Master & Ph.D) အတွက် KKU ၏ အထူးစံနှုန်းသတ်မှတ်ချက်များကို မြန်မာလို တိကျလွယ်ကူစွာ နားလည်နိုင်ရန် စီစဉ်ဖော်ပြထားသော အပြန်အလှန်အထောက်အကူပြု လမ်းညွှန်ဝဘ်ဆိုဒ်။",

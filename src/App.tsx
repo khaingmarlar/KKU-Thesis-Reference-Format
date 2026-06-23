@@ -23,6 +23,7 @@ import {
   ShieldCheck,
   RotateCcw,
   Sparkles,
+  AlertTriangle,
   HelpCircle,
   Clock,
   Sun,
@@ -204,9 +205,9 @@ export default function App() {
     <div id="kku-thesis-app" className={`min-h-screen font-sans transition-colors duration-200 ${sBg}`}>
       
       {/* Dynamic Header Badge Announcement */}
-      <div className={`text-center py-2 px-4 text-xs font-mono tracking-wide flex items-center justify-center gap-1.5 border-b border-white/10 bg-gradient-to-r from-amber-600/35 via-yellow-600/25 to-amber-600/35 text-amber-200`}>
-        <Sparkles className="h-4 w-4 animate-pulse text-[#ffd700]" /> 
-        <span className="font-semibold">{t.top_tagline}</span>
+      <div className={`text-center py-2.5 px-4 text-xs font-sans tracking-wide flex flex-col sm:flex-row items-center justify-center gap-2 border-b border-white/10 bg-gradient-to-r from-amber-600/35 via-yellow-600/25 to-amber-600/35 text-amber-200 leading-relaxed md:leading-normal`}>
+        <AlertTriangle className="h-4 w-4 shrink-0 text-[#ffd700] animate-pulse" /> 
+        <span className="font-semibold text-center leading-normal">{t.top_tagline}</span>
       </div>
 
       {/* Main Top Navigation Head Bar */}
@@ -241,40 +242,40 @@ export default function App() {
                   type="button"
                   id="lang-btn-my"
                   onClick={() => setAppLanguage("my")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all duration-150 cursor-pointer flex items-center gap-1 ${
+                  className={`px-3 py-1.5 text-xs font-mono font-bold rounded-lg transition-all duration-150 cursor-pointer ${
                     appLanguage === "my"
                       ? "bg-[#ffd700] text-[#0a0a0c] shadow-sm"
-                      : "text-zinc-400 hover:text-white"
+                      : "text-zinc-400 hover:text-white hover:bg-white/5"
                   }`}
-                  title="မြန်မာဘာသာ"
+                  title="မြန်မာဘာသာ (MM)"
                 >
-                  <span className="text-sm">🇲🇲</span> Myanmar
+                  MM
                 </button>
                 <button
                   type="button"
                   id="lang-btn-th"
                   onClick={() => setAppLanguage("th")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all duration-150 cursor-pointer flex items-center gap-1 ${
+                  className={`px-3 py-1.5 text-xs font-mono font-bold rounded-lg transition-all duration-150 cursor-pointer ${
                     appLanguage === "th"
                       ? "bg-[#ffd700] text-[#0a0a0c] shadow-sm"
-                      : "text-zinc-400 hover:text-white"
+                      : "text-zinc-400 hover:text-white hover:bg-white/5"
                   }`}
-                  title="ภาษาไทย"
+                  title="ภาษาไทย (TH)"
                 >
-                  <span className="text-sm">🇹🇭</span> ไทย
+                  TH
                 </button>
                 <button
                   type="button"
                   id="lang-btn-en"
                   onClick={() => setAppLanguage("en")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all duration-150 cursor-pointer flex items-center gap-1 ${
+                  className={`px-3 py-1.5 text-xs font-mono font-bold rounded-lg transition-all duration-150 cursor-pointer ${
                     appLanguage === "en"
                       ? "bg-[#ffd700] text-[#0a0a0c] shadow-sm"
-                      : "text-zinc-400 hover:text-white"
+                      : "text-zinc-400 hover:text-white hover:bg-white/5"
                   }`}
-                  title="English Language"
+                  title="English Language (EN)"
                 >
-                  <span className="text-sm">🇬🇧</span> EN
+                  EN
                 </button>
               </div>
 
